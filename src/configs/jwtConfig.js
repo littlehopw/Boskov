@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const redisClient = require('./redisClient');
+const redisClient = require('../redisClient');
 
 const generateToken = (usuario) => {
   return jwt.sign({ id: usuario.id, role: usuario.role }, process.env.SECRET_JWT, { expiresIn: '1h' });

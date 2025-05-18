@@ -12,6 +12,8 @@ const userSchema = z.object({
     senha: z.string()
         .min(6, { message: "Senha deve ter pelo menos 6 caracteres" }),
 
+    role: z.string()
+        .min(1, { message: "Role é obrigatório" }),
     data_nascimento: z.string()
         .regex(/^\d{4}-\d{2}-\d{2}$/, { message: "Data de nascimento inválida (use o formato YYYY-MM-DD)" })
 }).strict();

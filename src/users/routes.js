@@ -36,6 +36,10 @@ const router = Router()
  *                 format: date
  *                 description: Data de nascimento do usuário
  *                 example: 2005-01-01
+ *               role:
+ *                 type: string
+ *                 description: Niveis de usuario
+ *                 example: admin
  *     responses:
  *       201:
  *         description: Usuário criado com sucesso

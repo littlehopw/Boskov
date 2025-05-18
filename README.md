@@ -124,4 +124,4 @@ Documentação Swagger interativa com todos os endpoints disponíveis.
 ## 👩‍💻 Desenvolvido por
 
 **Ana Clara Ribeiro**  
-[🔗 LinkedIn](https://www.linkedin.com/in/seu-perfil) • `Boskov Back-end @ IFTM`
+[🔗 LinkedIn](https://www.https://www.linkedin.com/in/ana-clara-ribeiro-rodrigues-da-cunha-61665825b/)

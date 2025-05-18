@@ -22,7 +22,7 @@ const createUsuario = async (req, res) => {
             return res.status(StatusCodes.BAD_REQUEST).json({ error: validate.error.format() });
         }
 
-        const { nome, email, senha, data_nascimento } = validate.data;
+        const { nome, email, senha, data_nascimento, role } = validate.data;
 
         // Verificação de unicidade do e-mail (manual, já que Zod não faz isso)
         const verifyEmail = await prisma.usuario.findUnique({
@@ -43,7 +43,8 @@ const createUsuario = async (req, res) => {
                 nome,
                 email,
                 senha: senhaCriptografada,
-                data_nascimento: new Date(data_nascimento)
+                data_nascimento: new Date(data_nascimento),
+                role
             },
         });
 
