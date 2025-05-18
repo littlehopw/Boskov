@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id               Int          @id @default(autoincrement())
+  nome             String
+  email            String       @unique
+  senha            String
+  data_nascimento  DateTime
+  avaliacoes       Avaliacao[]
+  role             String       @default("user")
+  status           Boolean      @default(true)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Genero {
+  id              Int            @id @default(autoincrement())
+  descricao       String         @unique
+  status          Boolean        @default(true)
+  filmes          Filme[]        
+  generosFilmes   GeneroFilme[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Filme {
+  id              Int              @id @default(autoincrement())
+  nome            String
+  diretor         String
+  ano_lancamento  DateTime
+  id_genero       Int
+  genero          Genero           @relation(fields: [id_genero], references: [id])
+  duracao         Int
+  produtora       String
+  classificacao   String
+  poster          String           @unique
+  status          Boolean          @default(true)
+  generosFilmes   GeneroFilme[]
+  avaliacoes      Avaliacao[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model GeneroFilme {
+  id         Int     @id @default(autoincrement())
+  id_genero  Int
+  id_filme   Int
+  status     Boolean @default(true)
+  genero     Genero  @relation(fields: [id_genero], references: [id])
+  filme      Filme   @relation(fields: [id_filme], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Avaliacao {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int
+  id_filme    Int
+  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
+  filme       Filme    @relation(fields: [id_filme], references: [id])
+  nota        Int
+  status      Boolean  @default(true)
+  comentario  String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
