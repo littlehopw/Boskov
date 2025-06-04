@@ -12,6 +12,35 @@ body {
   justify-content: center;
 }
 
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #1c1c1c, #3b3b3b);
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Começa do topo */
+  padding: 40px;
+  background: transparent;
+  box-sizing: border-box;
+}
+  
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px; /* largura máxima para os cards ficarem centralizados */
+  width: 100%;
+}
+
+
 .form-container {
   background-color: #ffffff;
   color: #1c1c1c;
