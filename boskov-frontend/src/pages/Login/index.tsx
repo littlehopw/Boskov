@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
       const { token } = response.data;
       localStorage.setItem('token', token);
       alert('Login realizado com sucesso!');
-      // window.location.href = '/filmes';
+      window.location.href = '/filmes';
     } catch (err: any) {
       console.error(err);
       if (err.response && err.response.data && err.response.data.message) {
