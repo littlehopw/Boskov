@@ -145,7 +145,7 @@ router.put('/:id', autenticarToken, userController.updateUsuarios);
 *                     description: Nome do usuário
 *                     example: João Silva
 */
-router.get('/', autenticarToken, userController.getUsuarios);
+router.get('/', autenticarToken, authorizeAdmin, userController.getUsuarios);
 
 router.post('/login', userController.loginUsuario);
 

@@ -1,6 +1,7 @@
 const express = require("express")
 const swggerUi = require("swagger-ui-express")
 const swaggerDocs = require('./configs/SwaggerConfig')
+const cors = require('cors');
 
 const user = require('./users/routes')
 
@@ -10,6 +11,8 @@ const filmeRoutes = require('./filmes/routes');
 const avaliacaoRoutes = require('./avaliacoes/routes');
 
 const app = express()
+
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use(express.json())
 
