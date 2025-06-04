@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import './style.css';
+import '../style.css';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState<string>('');
@@ -32,10 +32,10 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="form-container">
       <form onSubmit={handleLogin}>
-        <h2>Login</h2> 
-          <input
+        <h2>Login</h2>
+        <input
           type="email"
           placeholder="seunome@gmail.com"
           value={email}
@@ -52,6 +52,9 @@ const LoginPage: React.FC = () => {
         {erro && <p className="error">{erro}</p>}
         <button type="submit">Entrar</button>
       </form>
+      <button type="button" onClick={() => window.location.href = '/cadastro'}>
+        Criar Conta
+      </button>
     </div>
   );
 };
