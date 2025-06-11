@@ -157,6 +157,7 @@ const getPerfil = async (req, res) => {
         email: true,
         role: true,
         status: true,
+        data_nascimento: true
       },
     });
 

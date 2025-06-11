@@ -6,6 +6,7 @@ import AvaliacaoPage from './pages/Avaliação/index';
 import CriarFilmePage from './pages/Filmes/criar-filme';
 import CriarGeneroPage from './pages/Genero/criar-genero';
 import PerfilPage from './pages/Perfil/index';
+import AvaliacoesPage from './pages/Avaliação/avaliações';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/criar-filme" element={<CriarFilmePage />} />
         <Route path="/criar-genero" element={<CriarGeneroPage />} />
         <Route path="/perfil" element={<PerfilPage />} />
+        <Route path="/avaliacoes" element={<AvaliacoesPage />} />
       </Routes>
     </Router>
   );
