@@ -147,6 +147,30 @@ const logoutUsuario = (req, res) => {
     }
 }
 
+const getPerfil = async (req, res) => {
+  try {
+    const usuario = await prisma.usuario.findUnique({
+      where: { id: req.user.id },
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    if (!usuario) {
+      return res.status(StatusCodes.NOT_FOUND).json({ error: "Usuário não encontrado" });
+    }
+
+    return res.status(StatusCodes.OK).json(usuario);
+  } catch (error) {
+    console.log(error);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Erro ao buscar perfil" });
+  }
+};
+
 const autenticarToken = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -176,4 +200,4 @@ const getUsuarios = async (req, res) => {
     }
 }
 
-module.exports = { createUsuario, getUsuarios, updateUsuarios, deleteUsuarios, loginUsuario, logoutUsuario, autenticarToken }
+module.exports = { createUsuario, getUsuarios, updateUsuarios, deleteUsuarios, loginUsuario, logoutUsuario, autenticarToken, getPerfil }

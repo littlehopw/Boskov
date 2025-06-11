@@ -151,4 +151,6 @@ router.post('/login', userController.loginUsuario);
 
 router.post('/logout', autenticarToken, userController.logoutUsuario);
 
+router.get('/profile', autenticarToken, userController.getPerfil);
+
 module.exports = router

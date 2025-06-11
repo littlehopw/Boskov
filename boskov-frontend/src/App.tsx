@@ -2,6 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/Login/index';
 import CadastroPage from './pages/Cadastro/index';
 import FilmesPage from './pages/Filmes/index';
+import AvaliacaoPage from './pages/Avaliação/index';
+import CriarFilmePage from './pages/Filmes/criar-filme';
+import CriarGeneroPage from './pages/Genero/criar-genero';
+import PerfilPage from './pages/Perfil/index';
 
 function App() {
   return (
@@ -10,6 +14,10 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/cadastro" element={<CadastroPage />} />
         <Route path="/filmes" element={<FilmesPage />} />
+        <Route path="/avaliar/:idFilme" element={<AvaliacaoPage />} />
+        <Route path="/criar-filme" element={<CriarFilmePage />} />
+        <Route path="/criar-genero" element={<CriarGeneroPage />} />
+        <Route path="/perfil" element={<PerfilPage />} />
       </Routes>
     </Router>
   );
