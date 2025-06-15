@@ -16,11 +16,9 @@ function App() {
     <Router>
       <MensagemErro />
       <Routes>
-        {/* Rotas públicas */}
         <Route path="/" element={<LoginPage />} />
         <Route path="/cadastro" element={<CadastroPage />} />
 
-        {/* Rotas protegidas */}
         <Route path="/filmes" element={
           <PrivateRoute>
             <FilmesPage />

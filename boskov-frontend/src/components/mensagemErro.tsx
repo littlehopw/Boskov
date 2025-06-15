@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useError } from '../context/error-context';
+import { useError } from '../context/errorContext';
 
 export const MensagemErro = () => {
   const { errorMessage, setErrorMessage } = useError();
