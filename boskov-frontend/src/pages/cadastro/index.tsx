@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../style.css"; // certifique-se de que o style.css está na raiz de src
+import "../style.css";
 
 export default function CadastroPage() {
   const [form, setForm] = useState({

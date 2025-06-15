@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/Login/index';
-import CadastroPage from './pages/Cadastro/index';
-import FilmesPage from './pages/Filmes/index';
-import AvaliacaoPage from './pages/Avaliação/index';
-import CriarFilmePage from './pages/Filmes/criar-filme';
-import CriarGeneroPage from './pages/Genero/criar-genero';
-import PerfilPage from './pages/Perfil/index';
-import AvaliacoesPage from './pages/Avaliação/avaliações';
-import { PrivateRoute } from './components/private-route';
-import { MensagemErro } from './components/mensagem-erro';
+import LoginPage from './pages/login/index';
+import CadastroPage from './pages/cadastro/index';
+import FilmesPage from './pages/filmes/index';
+import AvaliacaoPage from './pages/avaliação/index';
+import CriarFilmePage from './pages/filmes/criarFilme';
+import CriarGeneroPage from './pages/genero/criarGenero';
+import PerfilPage from './pages/perfil/index';
+import AvaliacoesPage from './pages/avaliação/avaliações';
+import { PrivateRoute } from './components/privateRoute';
+import { MensagemErro } from './components/mensagemErro';
 
 function App() {
   return (

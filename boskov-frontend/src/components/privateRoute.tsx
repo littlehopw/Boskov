@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useError } from '../context/error-context';
+import { useError } from '../context/errorContext';
 import type { JSX } from 'react';
 
 interface PrivateRouteProps {
