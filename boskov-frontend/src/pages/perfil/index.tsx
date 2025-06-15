@@ -10,8 +10,8 @@ interface Usuario {
     email: string;
     senha: string;
     data_nascimento: string;
-    status?: boolean;
     role: string;
+    status?: boolean;
 }
 
 const PerfilPage: React.FC = () => {
@@ -30,12 +30,14 @@ const PerfilPage: React.FC = () => {
                 });
 
                 const userData = response.data;
-                const dataNascimentoFormatada = new Date(userData.data_nascimento).toISOString().slice(0, 10);
+                const dataNascimento = new Date(userData.data_nascimento)
+                    .toISOString()
+                    .slice(0, 10);
 
-                setUsuario({
-                    ...userData,
+                setUsuario({ 
+                    ...userData, 
                     senha: '',
-                    data_nascimento: dataNascimentoFormatada
+                    data_nascimento: dataNascimento 
                 });
             } catch (err) {
                 console.error(err);
@@ -46,7 +48,7 @@ const PerfilPage: React.FC = () => {
         carregarPerfil();
     }, [token]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         if (usuario) {
             setUsuario({ ...usuario, [e.target.name]: e.target.value });
         }
@@ -56,7 +58,6 @@ const PerfilPage: React.FC = () => {
         e.preventDefault();
         setErro('');
         setMensagem('');
-
         try {
             await axios.put(`http://localhost:3000/user/${usuario?.id}`, {
                 nome: usuario?.nome,
@@ -67,7 +68,8 @@ const PerfilPage: React.FC = () => {
             }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setMensagem('Perfil atualizado com sucesso!');
+            setMensagem('Dados atualizados com sucesso!');
+            setTimeout(() => navigate('/filmes'), 1500);
         } catch (err: any) {
             console.error(err);
             setErro(err.response?.data?.error || 'Erro ao atualizar perfil.');
@@ -77,70 +79,67 @@ const PerfilPage: React.FC = () => {
     if (!usuario) return <p>Carregando perfil...</p>;
 
     return (
-        <div className="form-container" style={{ maxWidth: '400px', margin: '50px auto' }}>
-            <h2>Gerenciar Perfil</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="nome"
-                    value={usuario.nome}
-                    onChange={handleChange}
-                    placeholder="Nome"
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    value={usuario.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    required
-                />
-                <div style={{ position: 'relative' }}>
+        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+            <div className="bg-gray-800 p-6 rounded-md shadow-md w-full max-w-md">
+                <h2 className="text-2xl font-semibold text-red-500 mb-4">Gerenciar Perfil</h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <input
-                        type={mostrarSenha ? 'text' : 'password'}
-                        name="senha"
-                        value={usuario.senha}
+                        className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        type="text"
+                        name="nome"
+                        value={usuario.nome}
                         onChange={handleChange}
-                        placeholder="Senha"
                         required
-                        style={{ width: '95%' }}
                     />
-                    <FontAwesomeIcon
-                        icon={mostrarSenha ? faEyeSlash : faEye}
-                        onClick={() => setMostrarSenha(!mostrarSenha)}
-                        style={{
-                            position: 'absolute',
-                            right: '1px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            cursor: 'pointer',
-                            color: '#333',
-                        }}
-                        title={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+                    <input
+                        className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        type="email"
+                        name="email"
+                        value={usuario.email}
+                        onChange={handleChange}
+                        required
                     />
-                </div>
-                <input
-                    type="date"
-                    name="data_nascimento"
-                    value={usuario.data_nascimento}
-                    onChange={handleChange}
-                    required
-                />
-                {mensagem && <p style={{ color: 'green' }}>{mensagem}</p>}
-                {erro && <p className="error">{erro}</p>}
-
-                <button type="submit" onClick={() => navigate(-1)}>Salvar</button>
-                <button
-                    type="button"
-                    onClick={() => navigate('/filmes')}
-                    style={{ backgroundColor: '#555' }}
-                >
-                    Cancelar
-                </button>
-            </form>
+                    <div className="relative">
+                        <input
+                            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 w-full"
+                            type={mostrarSenha ? "text" : "password"}
+                            name="senha"
+                            value={usuario.senha}
+                            onChange={handleChange}
+                            required
+                        />
+                        <FontAwesomeIcon
+                            icon={mostrarSenha ? faEyeSlash : faEye}
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-100 cursor-pointer"
+                        />
+                    </div>
+                    <input
+                        className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        type="date"
+                        name="data_nascimento"
+                        value={usuario.data_nascimento}
+                        onChange={handleChange}
+                        required
+                    />
+                    {mensagem && <p className="text-green-500 mt-2">{mensagem}</p>}
+                    {erro && <p className="text-red-500 mt-2">{erro}</p>}
+                    <button
+                        className="bg-blue-500 hover:bg-blue-600 text-gray-50 font-semibold py-2 px-4 rounded-md transition">
+                        Salvar
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => navigate('/filmes')}
+                        className="bg-gray-500 hover:bg-gray-600 text-gray-50 font-semibold py-2 px-4 rounded-md">
+                        Cancelar
+                    </button>
+                </form>
+            </div>
         </div>
     );
-};
+}
 
 export default PerfilPage;
+
+

@@ -57,7 +57,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="bg-red-500 text-gray-50 font-semibold py-2 rounded hover:bg-red-600 transition-colors"
+            className="bg-blue-500 hover:bg-blue-600 text-gray-50 font-semibold py-2 rounded transition-colors"
           >
             Entrar
           </button>
@@ -65,8 +65,7 @@ const LoginPage = () => {
 
         <button
           onClick={() => (window.location.href = '/cadastro')}
-          className="bg-gray-500 text-gray-50 font-semibold py-2 rounded mt-4 hover:bg-gray-600 transition-colors w-full"
-        >
+          className="bg-gray-500 text-gray-50 font-semibold py-2 rounded mt-4 hover:bg-gray-600 transition-colors w-full">
           Criar Conta
         </button>
       </div>

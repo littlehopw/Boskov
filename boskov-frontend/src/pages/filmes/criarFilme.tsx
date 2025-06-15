@@ -53,8 +53,8 @@ const CriarFilmePage: React.FC = () => {
     }
 
     fetch('http://localhost:3000/genero')
-      .then(res => res.json())
-      .then(data => setGeneros(data))
+      .then((res) => res.json())
+      .then((data) => setGeneros(data))
       .catch(() => setError('Erro ao carregar os gêneros.'));
   }, [navigate, userRole]);
 
@@ -66,7 +66,6 @@ const CriarFilmePage: React.FC = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
-
     try {
       const response = await fetch('http://localhost:3000/filme', {
         method: 'POST',
@@ -78,8 +77,8 @@ const CriarFilmePage: React.FC = () => {
           ...form,
           id_genero: Number(form.id_genero),
           duracao: Number(form.duracao),
-          ano_lancamento: new Date(form.ano_lancamento).toISOString(),
-        }),
+          ano_lancamento: new Date(form.ano_lancamento).toISOString()
+        })
       });
 
       if (!response.ok) {
@@ -97,30 +96,98 @@ const CriarFilmePage: React.FC = () => {
   };
 
   return (
-    <div className="form-container" style={{ maxWidth: '500px', margin: '50px auto' }}>
-      <h2>Criar Filme</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="nome" placeholder="Nome" value={form.nome} onChange={handleChange} required />
-        <input type="text" name="diretor" placeholder="Diretor" value={form.diretor} onChange={handleChange} required />
-        <input type="date" name="ano_lancamento" value={form.ano_lancamento} onChange={handleChange} required />
-
-        <select name="id_genero" value={form.id_genero} onChange={handleChange} required>
-          <option value={0}>Selecione um gênero</option>
-          {generos.map(g => (
-            <option key={g.id} value={g.id}>{g.descricao}</option>
-          ))}
-        </select>
-
-        <input type="number" name="duracao" placeholder="Duração (minutos)" value={form.duracao} onChange={handleChange} required />
-        <input type="text" name="produtora" placeholder="Produtora" value={form.produtora} onChange={handleChange} required />
-        <input type="text" name="classificacao" placeholder="Classificação" value={form.classificacao} onChange={handleChange} required />
-        <input type="text" name="poster" placeholder="URL do Poster" value={form.poster} onChange={handleChange} required />
-
-        {error && <p className="error">{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-
-        <button type="submit">Criar Filme</button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-900">
+      <div className="bg-gray-800 p-6 rounded-md shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-red-500 mb-4">Criar Filme</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="text"
+            name="nome"
+            placeholder="Nome"
+            value={form.nome}
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="text"
+            name="diretor"
+            placeholder="Diretor"
+            value={form.diretor}
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="date"
+            name="ano_lancamento"
+            value={form.ano_lancamento}
+            onChange={handleChange}
+            required
+          />
+          <select
+            className="bg-gray-700 text-gray-50 p-2 rounded-md mt-1 w-full"
+            name="id_genero"
+            value={form.id_genero}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecione um gênero</option>
+            {generos.map((g) => (
+              <option key={g.id} value={g.id}>{g.descricao}</option>
+            ))}
+          </select>
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="number"
+            name="duracao"
+            placeholder="Duração (minutos)"
+            value={form.duracao}
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="text"
+            name="produtora"
+            placeholder="Produtora"
+            value={form.produtora}
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="text"
+            name="classificacao"
+            placeholder="Classificação"
+            value={form.classificacao}
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="p-2 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+            type="text"
+            name="poster"
+            placeholder="URL do Poster"
+            value={form.poster}
+            onChange={handleChange}
+            required
+          />
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {success && <p className="text-green-500 mt-2">{success}</p>}
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-gray-50 font-semibold py-1 px-3 rounded-md">
+            Criar Filme
+          </button>
+        </form>
+        <button
+          onClick={() => navigate('/gerenciar-filmes')}
+          className="bg-gray-500 hover:bg-gray-600 text-gray-50 font-semibold py-1 px-3 rounded-md mt-4">
+          Voltar para "Gerenciar Filmes"
+        </button>
+      </div>
     </div>
   );
 };

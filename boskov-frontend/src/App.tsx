@@ -9,6 +9,7 @@ import PerfilPage from './pages/perfil/index';
 import AvaliacoesPage from './pages/avaliação/avaliações';
 import { PrivateRoute } from './components/privateRoute';
 import { MensagemErro } from './components/mensagemErro';
+import GerenciarFilmesPage from './pages/filmes/gerenciarFilmes';
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
         <Route path="/filmes" element={
           <PrivateRoute>
             <FilmesPage />
+          </PrivateRoute>
+        }
+        />
+        <Route path="/gerenciar-filmes" element={
+          <PrivateRoute>
+            <GerenciarFilmesPage />
           </PrivateRoute>
         }
         />
